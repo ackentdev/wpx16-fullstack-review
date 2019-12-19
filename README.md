@@ -14,10 +14,32 @@
 
 - users
 ```sql
-
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    profile_pic TEXT DEFAULT 'https://api.time.com/wp-content/uploads/2019/08/mocking_spongebob.jpg',
+    email VARCHAR(80) NOT NULL,
+    password TEXT NOT NULL
+);
 ```
 
 - memes
+```sql
+CREATE TABLE memes(
+    meme_id SERIAL PRIMARY KEY,
+    img_url TEXT NOT NULL,
+    category VARCHAR(20)
+);
+```
+
+- favorites
+```sql
+CREATE TABLE favorites(
+    favorites_id SERIAL PRIMARY KEY,
+    meme_id REFERENCES memes(meme_id),
+    user_id REFERENCES users(user_id)
+)
+```
 
 
 ## ***SERVER***
@@ -45,3 +67,32 @@
 
 ## ***CLIENT***
 
+### dependencies
+- axios
+- redux
+- react-redux
+- react-router-dom
+- http-proxy-middleware
+- redux-promise-middleware
+
+### routes
+- login(/login) => home(/)
+- profile(/profile)
+- account(/account)
+- addMeme(/add)
+
+### file-structure
+- src/
+    - App.js
+    - App.css
+    - reset.css
+    - index.js
+    - components/
+        - Login.js /.css
+        - Profile.js /.css
+        - Home.js /.css
+        - addMeme.js /.css
+    - reducks/
+        - reducer
+        - store
+    - setUpProxy.js
