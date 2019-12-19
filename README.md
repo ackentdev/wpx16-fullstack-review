@@ -38,7 +38,7 @@ CREATE TABLE favorites(
     favorites_id SERIAL PRIMARY KEY,
     meme_id REFERENCES memes(meme_id),
     user_id REFERENCES users(user_id)
-)
+);
 ```
 
 
