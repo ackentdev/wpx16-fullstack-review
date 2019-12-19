@@ -23,7 +23,7 @@ massive(CONNECTION_STRING).then( db => {
 })
 
 // AUTH
-// app.post('/api/login', login);
+app.post('/api/login', login);
 app.post('/api/register', register);
 // app.get('/api/userSession', userSession);
 // app.get('/api/logout', logout);
