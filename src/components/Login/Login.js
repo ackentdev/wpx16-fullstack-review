@@ -8,7 +8,9 @@ class Login extends React.Component{
         super()
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            username: '',
+            newUser: false
         }
 
     }
@@ -20,16 +22,32 @@ class Login extends React.Component{
         this.props.history.push('/home')
     }
 
+    register = async () => {
+        let {username, email, password} = this.state
+        const user = await axios.post('/api/register', {username, email, password})
+        this.props.setUser(user.data)
+        this.props.history.push('/home')
+    }
+
     changeHandler = (property, value) => {
         this.setState({
             [property]: value
         })
     }
 
+    toggleDisplay = () => {
+        this.setState({
+            newUser: !this.state.newUser
+        })
+    }
+
     render(){
-        const {email, password} = this.state
+        const {email, password, username, newUser} = this.state
     return(
         <div>
+            {!newUser
+                ?
+                <div>
             <form onSubmit={(e) => {
                 e.preventDefault()
                 this.login()
@@ -50,6 +68,41 @@ class Login extends React.Component{
                 type="submit"
                 value="Login"/>
             </form>
+            <button onClick={() => this.toggleDisplay()}>Create an Account</button>
+            </div>
+            :
+            <div>
+               <form onSubmit={(e) => {
+                e.preventDefault()
+                this.register()
+                }}>
+                <input 
+                placeholder="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={(e) => {this.changeHandler(e.target.name, e.target.value)}}
+                />
+                <input
+                placeholder="email" 
+                type="text"
+                name="email" 
+                value={email} 
+                onChange={(e) => {this.changeHandler(e.target.name, e.target.value)}}/>
+                <input 
+                placeholder="password"
+                type="password"
+                name="password" 
+                value={password} 
+                onChange={(e) => {this.changeHandler(e.target.name, e.target.value)}}/>
+                <input 
+                type="submit"
+                value="Register"/>
+            </form>
+            <button onClick={() => this.toggleDisplay()}>I already have an account</button> 
+            </div>
+        }
+            
         </div>
     )
     }

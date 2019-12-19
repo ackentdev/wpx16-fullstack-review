@@ -1,7 +1,21 @@
 import React from 'react';
+import axios from 'axios'
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {setUser} from '../../reducks/reducer'
 
-export default function Header(){
+class Header extends React.Component{
+
+    componentDidMount(){
+        this.getUser()
+    }
+
+    getUser = async() => {
+        const user = await axios.get('/api/userSession')
+        this.props.setUser(user.data)
+    }
+    render(){
+        console.log("from redux: ", this.props.user)
     return(
         <header>
             <NavLink exact to='/'>Login</NavLink>
@@ -9,4 +23,16 @@ export default function Header(){
             <NavLink to="/add_meme">Add Meme</NavLink>
         </header>
     )
+    }
 }
+
+function mapReduxStateToProps(reduxState){
+    return reduxState;
+}
+
+const mapDispatchToProps = {
+    setUser
+}
+
+
+export default connect(mapReduxStateToProps, mapDispatchToProps)(Header);
