@@ -25,7 +25,7 @@ massive(CONNECTION_STRING).then( db => {
 // AUTH
 app.post('/api/login', login);
 app.post('/api/register', register);
-// app.get('/api/userSession', userSession);
-// app.get('/api/logout', logout);
+app.get('/api/userSession', userSession);
+app.get('/api/logout', logout);
 
 app.listen(SERVER_PORT, () => console.log(`server running on port${SERVER_PORT}`))
