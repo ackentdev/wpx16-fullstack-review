@@ -17,11 +17,21 @@ class Header extends React.Component{
     render(){
         console.log("from redux: ", this.props.user)
     return(
-        <header>
-            <NavLink exact to='/'>Login</NavLink>
-            <NavLink to="/home">Home</NavLink>
-            <NavLink to="/add_meme">Add Meme</NavLink>
-        </header>
+        <div>
+            {this.props.user 
+            ?
+            <header>
+                <NavLink exact to='/'>Login</NavLink>
+                <NavLink to="/home">Home</NavLink>
+                <NavLink to="/add_meme">Add Meme</NavLink>
+            </header>
+            :
+            <header>
+                <NavLink exact to='/'>Login</NavLink>
+            </header>
+            }
+        
+        </div>
     )
     }
 }

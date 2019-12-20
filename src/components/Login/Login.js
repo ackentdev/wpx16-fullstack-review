@@ -19,6 +19,7 @@ class Login extends React.Component{
         let {email, password} = this.state
         const user = await axios.post('/api/login', {email, password})
         this.props.setUser(user.data);
+        localStorage.setItem("user", user.data.username)
         this.props.history.push('/home')
     }
 
@@ -26,6 +27,7 @@ class Login extends React.Component{
         let {username, email, password} = this.state
         const user = await axios.post('/api/register', {username, email, password})
         this.props.setUser(user.data)
+        localStorage.setItem("user", user.data)
         this.props.history.push('/home')
     }
 

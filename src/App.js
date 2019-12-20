@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import AddMeme from './components/AddMeme/AddMeme';
+import PrivateRoute from './components/PrivateRoute';
 import {Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -14,9 +15,9 @@ function App() {
       <Header/>
       <Switch>
         <Route exact path="/" component={Login}/>
-        <Route path="/home" component={Home}/>
-        <Route path="/profile" component={Profile}/>
-        <Route path="/add_meme" component={AddMeme}/>
+        <PrivateRoute path="/home" component={Home}/>
+        <PrivateRoute path="/profile" component={Profile}/>
+        <PrivateRoute path="/add_meme" component={AddMeme}/>
       </Switch>
     </div>
   );
