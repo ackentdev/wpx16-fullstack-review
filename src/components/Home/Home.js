@@ -8,14 +8,7 @@ export default class Home extends React.Component{
 
     render(){
     return(
-        <div>
-        {!this.props.user
-        ?
-            <img src="cuteanimation" />
-        :
         <div>This is the home component</div>
-        }
-        </div>
     )
     }
 }
